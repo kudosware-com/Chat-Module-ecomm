@@ -6,10 +6,12 @@
 </head>
 <body>
     <div>
+    <h2>Users</h2>
     {% for user in users %}
     <b>{{ user.username }}</b>
     <br>
     {% endfor %}
+    <br>
     </div>
     <textarea id="chat-log" cols="100" rows="20"></textarea><br>
     <input id="chat-message-input" type="text" size="100"><br>
@@ -29,7 +31,16 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            if(data.type == "initial_messages"){
+                for(var i=0;i<data.message.length;i++){
+                    document.querySelector('#chat-log').value += (data.message[i]["sender"]+": "+data.message[i]["text"] + '\n');
+                }
+            }
+            else{
+                console.log(data)
+                document.querySelector('#chat-log').value += (data.sender+": "+data.message + '\n');
+            }
+            
         };
 
         chatSocket.onclose = function(e) {
@@ -47,7 +58,8 @@
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
             chatSocket.send(JSON.stringify({
-                'message': message
+                'message': message,
+                // 'sender': 
             }));
             messageInputDom.value = '';
         };

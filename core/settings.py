@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'src',
     'user',
     'dj_rest_auth',
     'rest_framework',
@@ -51,7 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth.registration',
     'chat',
-    'channels'
+    'channels',
 
 ]
 SITE_ID = 1

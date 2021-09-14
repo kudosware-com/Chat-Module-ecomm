@@ -3,6 +3,8 @@
 Clone Repo \
 Go into folder(to start backend server) 
 ```
+cd Folder
+```
 Create virtual environment 
 ```
 virtualenv env
